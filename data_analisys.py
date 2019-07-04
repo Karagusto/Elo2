@@ -2,6 +2,10 @@
 #import plotly.graph_objs as go
 #import plotly.tools as tools
 #from plotly.tools import FigureFactory as FF
+from matplotlib import pyplot as plt
+from matplotlib import cm as cm
+
+import matplotlib.pyplot as plt
 
 import numpy as np
 import pandas as pd
@@ -11,7 +15,7 @@ import scipy
 
 #real_state_data = pd.read_csv('Precos_Imoveis.csv')
 
-real_state_data = pd.read_csv('dataframe.csv')
+real_state_data = pd.read_csv('dataframe_cont.csv')
 
 index = real_state_data.index
 columns = real_state_data.columns
@@ -65,18 +69,15 @@ values = real_state_data.values
 # MiscFeature	= real_state_data['MiscFeature']
 # SaleType	= real_state_data['SaleType']
 # SaleCondition	= real_state_data['SaleCondition']
+# KitchenQual	= real_state_data['KitchenQual']
 LotFrontage = real_state_data['LotFrontage']
 LotArea = real_state_data['LotArea']
-
 OverallQual	= real_state_data['OverallQual']
 OverallCond	= real_state_data['OverallCond']
 YearBuilt	= real_state_data['YearBuilt']
 YearRemodAdd	= real_state_data['YearRemodAdd']
-
 TotalBsmtSF	= real_state_data['TotalBsmtSF']
-
 CentralAir	= real_state_data['CentralAir']
-
 one1stFlrSF	= real_state_data['1stFlrSF']
 two2ndFlrSF	= real_state_data['2ndFlrSF']
 LowQualFinSF	= real_state_data['LowQualFinSF']
@@ -87,49 +88,38 @@ FullBath	= real_state_data['FullBath']
 HalfBath	= real_state_data['HalfBath']
 BedroomAbvGr	= real_state_data['BedroomAbvGr']
 KitchenAbvGr	= real_state_data['KitchenAbvGr']
-KitchenQual	= real_state_data['KitchenQual']
 TotRmsAbvGrd	= real_state_data['TotRmsAbvGrd']
-
 Fireplaces	= real_state_data['Fireplaces']
-
 GarageCars	= real_state_data['GarageCars']
 GarageArea	= real_state_data['GarageArea']
-
 WoodDeckSF	= real_state_data['WoodDeckSF']
 OpenPorchSF	= real_state_data['OpenPorchSF']
 EnclosedPorch	= real_state_data['EnclosedPorch']
 three3SsnPorch	= real_state_data['3SsnPorch']
 ScreenPorch	= real_state_data['ScreenPorch']
 PoolArea	= real_state_data['PoolArea']
-
 MiscVal	= real_state_data['MiscVal']
 MoSold	= real_state_data['MoSold']
 YrSold	= real_state_data['YrSold']
-
 SalePrice = real_state_data['SalePrice']
+#correlations = real_state_data.corr()
+
+fig = plt.figure()
+ax1 = fig.add_subplot(111)
+cmap = cm.get_cmap('jet', 30)
+cax = ax1.imshow(real_state_data.corr(), interpolation="nearest", cmap=cmap)
+ax1.grid(True)
+plt.title('Real estate correlation')
+labels = ['LotFrontage'	'LotArea'	'OverallQual'	'OverallCond'	'YearBuilt'	'YearRemodAdd'	'Street'	'MasVnrArea'	'BsmtFinSF1'	'BsmtFinSF2'	'BsmtUnfSF'	'TotalBsmtSF'	'CentralAir'	'1stFlrSF'	'2ndFlrSF'	'LowQualFinSF'	'GrLivArea'	'BsmtFullBath'	'BsmtHalfBath'	'FullBath'	'HalfBath'	'BedroomAbvGr'	'KitchenAbvGr'	'TotRmsAbvGrd'	'Fireplaces'	'GarageYrBlt'	'GarageCars'	'GarageArea'	'WoodDeckSF'	'OpenPorchSF'	'EnclosedPorch'	'3SsnPorch'	'ScreenPorch'	'PoolArea'	'PoolQC'	'MiscVal'	'MoSold'	'YrSold'	'SalePrice']
+ax1.set_xticklabels(labels, fontsize=6)
+ax1.set_yticklabels(labels, fontsize=6)
+# Add colorbar, make sure to specify tick locations to match desired ticklabels
+fig.colorbar(cax, ticks=[.75, .8, .85, .90, .95, 1])
+plt.show()
 
 #lotfrontage nan to mean
 #MasVrnArea to 0
 
 
-dt = YrSold
 
-nullData = dt.isnull().sum()
-rangeDataMin = dt.min()
-rangeDataMax = dt.max()
-meanData = dt.mean()
-
-dt2 = dt.fillna(meanData)
-nullData2 = dt2.isnull().sum()
-meanData2 = dt2.mean()
-
-
-print('null: ', nullData, '\n' + 'min: ', rangeDataMin, '\n' + 'max: ', rangeDataMax, '\n' + 'mean: ', meanData, '\n' + 'newNull: ', nullData2, '\n' + 'newMean: ', meanData2)
-
-#LotFrontage = LotFrontage.fillna(LotFrontage.mean(), inplace=True)
-#MasVnrArea = MasVnrArea.fillna(0, inplace=True)
-#MasVnrType = MasVnrType.fillna('None', inplace=True)
-Electrical = Electrical.fillna('SBrkr', inplace=True)
-print(real_state_data)
-
-export_csv = real_state_data.to_csv(r'C:\Users\ricardofragoso\PycharmProjects\Elo_dataframe.csv', index = None, header=True)
+#export_csv = real_state_data2.to_csv(r'C:\Users\ricardofragoso\PycharmProjects\Elo_dataframe.csv', index = None, header=True)

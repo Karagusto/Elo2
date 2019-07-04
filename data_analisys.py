@@ -70,6 +70,7 @@ values = real_state_data.values
 # SaleType	= real_state_data['SaleType']
 # SaleCondition	= real_state_data['SaleCondition']
 # KitchenQual	= real_state_data['KitchenQual']
+##################################################################################################################3
 LotFrontage = real_state_data['LotFrontage']
 LotArea = real_state_data['LotArea']
 OverallQual	= real_state_data['OverallQual']
@@ -102,24 +103,81 @@ MiscVal	= real_state_data['MiscVal']
 MoSold	= real_state_data['MoSold']
 YrSold	= real_state_data['YrSold']
 SalePrice = real_state_data['SalePrice']
-#correlations = real_state_data.corr()
 
-fig = plt.figure()
-ax1 = fig.add_subplot(111)
-cmap = cm.get_cmap('jet', 30)
-cax = ax1.imshow(real_state_data.corr(), interpolation="nearest", cmap=cmap)
-ax1.grid(True)
-plt.title('Real estate correlation')
-labels = ['LotFrontage'	'LotArea'	'OverallQual'	'OverallCond'	'YearBuilt'	'YearRemodAdd'	'Street'	'MasVnrArea'	'BsmtFinSF1'	'BsmtFinSF2'	'BsmtUnfSF'	'TotalBsmtSF'	'CentralAir'	'1stFlrSF'	'2ndFlrSF'	'LowQualFinSF'	'GrLivArea'	'BsmtFullBath'	'BsmtHalfBath'	'FullBath'	'HalfBath'	'BedroomAbvGr'	'KitchenAbvGr'	'TotRmsAbvGrd'	'Fireplaces'	'GarageYrBlt'	'GarageCars'	'GarageArea'	'WoodDeckSF'	'OpenPorchSF'	'EnclosedPorch'	'3SsnPorch'	'ScreenPorch'	'PoolArea'	'PoolQC'	'MiscVal'	'MoSold'	'YrSold'	'SalePrice']
-ax1.set_xticklabels(labels, fontsize=6)
-ax1.set_yticklabels(labels, fontsize=6)
-# Add colorbar, make sure to specify tick locations to match desired ticklabels
-fig.colorbar(cax, ticks=[.75, .8, .85, .90, .95, 1])
-plt.show()
+correlations = real_state_data.corr()
+corr_sales = correlations['SalePrice'].sort_values(ascending=False)
+
+print(corr_sales)
+
+export_csv = corr_sales.to_csv(r'correlation_sales.csv', index = None, header=True)
+
+
+
 
 #lotfrontage nan to mean
 #MasVrnArea to 0
 
 
+# dt = YrSold
+#
+# nullData = dt.isnull().sum()
+# rangeDataMin = dt.min()
+# rangeDataMax = dt.max()
+# meanData = dt.mean()
+#
+# dt2 = dt.fillna(meanData)
+# nullData2 = dt2.isnull().sum()
+# meanData2 = dt2.mean()
+#
+#
+# print('null: ', nullData, '\n' + 'min: ', rangeDataMin, '\n' + 'max: ', rangeDataMax, '\n' + 'mean: ', meanData, '\n' + 'newNull: ', nullData2, '\n' + 'newMean: ', meanData2)
+#
+# #LotFrontage = LotFrontage.fillna(LotFrontage.mean(), inplace=True)
+# #MasVnrArea = MasVnrArea.fillna(0, inplace=True)
+# #MasVnrType = MasVnrType.fillna('None', inplace=True)
+# Electrical = Electrical.fillna('SBrkr', inplace=True)
+# print(real_state_data)
+#
+# export_csv = real_state_data.to_csv(r'C:\Users\ricardofragoso\PycharmProjects\Elo_dataframe.csv', index = None, header=True)
 
-#export_csv = real_state_data2.to_csv(r'C:\Users\ricardofragoso\PycharmProjects\Elo_dataframe.csv', index = None, header=True)
+
+
+
+
+
+
+############################################################################ correlation plots ############################################################################################################
+
+
+# names = ['LotFrontage'	'LotArea'	'OverallQual'	'OverallCond'	'YearBuilt'	'YearRemodAdd'	'Street'	'MasVnrArea'	'BsmtFinSF1'	'BsmtFinSF2'	'BsmtUnfSF'	'TotalBsmtSF'	'CentralAir'	'1stFlrSF'	'2ndFlrSF'	'LowQualFinSF'	'GrLivArea'	'BsmtFullBath'	'BsmtHalfBath'	'FullBath'	'HalfBath'	'BedroomAbvGr'	'KitchenAbvGr'	'TotRmsAbvGrd'	'Fireplaces'	'GarageYrBlt'	'GarageCars'	'GarageArea'	'WoodDeckSF'	'OpenPorchSF'	'EnclosedPorch'	'3SsnPorch'	'ScreenPorch'	'PoolArea'	'PoolQC'	'MiscVal'	'MoSold'	'YrSold'	'SalePrice']
+#
+# correlations = real_state_data.corr()
+# # plot correlation matrix
+# fig = plt.figure()
+# ax = fig.add_subplot(111)
+# cax = ax.matshow(correlations, vmin=-1, vmax=1)
+# fig.colorbar(cax)
+# ticks = np.arange(0,9,1)
+# ax.set_xticks(ticks)
+# ax.set_yticks(ticks)
+# ax.set_xticklabels(names)
+# ax.set_yticklabels(names)
+# plt.show()
+
+# fig = plt.figure()
+# ax1 = fig.add_subplot(111)
+# cmap = cm.get_cmap('jet', 30)
+# cax = ax1.imshow(real_state_data.corr(), interpolation="nearest", cmap=cmap)
+# ax1.grid(True)
+# plt.title('Real estate correlation')
+# labels = ['LotFrontage'	'LotArea'	'OverallQual'	'OverallCond'	'YearBuilt'	'YearRemodAdd'	'Street'	'MasVnrArea'	'BsmtFinSF1'	'BsmtFinSF2'	'BsmtUnfSF'	'TotalBsmtSF'	'CentralAir'	'1stFlrSF'	'2ndFlrSF'	'LowQualFinSF'	'GrLivArea'	'BsmtFullBath'	'BsmtHalfBath'	'FullBath'	'HalfBath'	'BedroomAbvGr'	'KitchenAbvGr'	'TotRmsAbvGrd'	'Fireplaces'	'GarageYrBlt'	'GarageCars'	'GarageArea'	'WoodDeckSF'	'OpenPorchSF'	'EnclosedPorch'	'3SsnPorch'	'ScreenPorch'	'PoolArea'	'PoolQC'	'MiscVal'	'MoSold'	'YrSold'	'SalePrice']
+# ax1.set_xticklabels(labels, fontsize=6)
+# ax1.set_yticklabels(labels, fontsize=6)
+# # Add colorbar, make sure to specify tick locations to match desired ticklabels
+# fig.colorbar(cax, ticks=[.75, .8, .85, .90, .95, 1])
+# plt.show()
+############################################################################ correlation plots ############################################################################################################
+
+
+
+

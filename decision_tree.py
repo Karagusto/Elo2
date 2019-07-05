@@ -52,6 +52,7 @@ features = list(real_state_data2.columns[:38])
 y = real_state_data2["Target"]
 X = real_state_data2[features]
 dt = DecisionTreeClassifier(min_samples_split=20, random_state=99)
+y_
 dt.fit(X, y)
 
 
@@ -76,3 +77,4 @@ def visualize_tree(tree, feature_names):
 
 
 visualize_tree(dt, features)
+

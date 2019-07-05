@@ -113,39 +113,6 @@ export_csv = corr_sales.to_csv(r'correlation_sales.csv', index = None, header=Tr
 
 
 
-
-#lotfrontage nan to mean
-#MasVrnArea to 0
-
-
-# dt = YrSold
-#
-# nullData = dt.isnull().sum()
-# rangeDataMin = dt.min()
-# rangeDataMax = dt.max()
-# meanData = dt.mean()
-#
-# dt2 = dt.fillna(meanData)
-# nullData2 = dt2.isnull().sum()
-# meanData2 = dt2.mean()
-#
-#
-# print('null: ', nullData, '\n' + 'min: ', rangeDataMin, '\n' + 'max: ', rangeDataMax, '\n' + 'mean: ', meanData, '\n' + 'newNull: ', nullData2, '\n' + 'newMean: ', meanData2)
-#
-# #LotFrontage = LotFrontage.fillna(LotFrontage.mean(), inplace=True)
-# #MasVnrArea = MasVnrArea.fillna(0, inplace=True)
-# #MasVnrType = MasVnrType.fillna('None', inplace=True)
-# Electrical = Electrical.fillna('SBrkr', inplace=True)
-# print(real_state_data)
-#
-# export_csv = real_state_data.to_csv(r'C:\Users\ricardofragoso\PycharmProjects\Elo_dataframe.csv', index = None, header=True)
-
-
-
-
-
-
-
 ############################################################################ correlation plots ############################################################################################################
 
 

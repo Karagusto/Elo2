@@ -6,7 +6,7 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn import metrics
 
 
-real_state_data = pd.read_csv('dataframe_cont.csv')
+real_state_data = pd.read_csv('dataframe_cont2.csv')
 
 X = real_state_data.drop('SalePrice', axis=1)
 y = real_state_data['SalePrice']
